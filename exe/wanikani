@@ -1,0 +1,29 @@
+require "wanikani"
+
+api_key = ENV['WANIKANI_API_KEY']
+raise "WANIKANI_API_KEY env var required" unless api_key
+
+def human_time(seconds)
+  if seconds < 60
+    "#{seconds} seconds"
+  elsif seconds < (60 * 60)
+    "#{seconds / 60} minutes"
+  elsif seconds < (60 * 60 * 24)
+    "#{seconds / (60 * 60)} hours"
+  else
+    "#{seconds / (60 * 60 * 24)} days"
+  end
+end
+
+wani_kani = WaniKani.new(api_key)
+
+seconds = wani_kani.seconds_until_review
+
+if seconds > 0
+  puts "You're not ready, come back in #{human_time(seconds)}"
+  exit 42
+else
+  puts "You're ready to study!"
+  puts "https://www.wanikani.com/dashboard"
+  exit 0
+end

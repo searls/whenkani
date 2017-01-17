@@ -1,7 +1,20 @@
-require "wanikani"
+require "whenkani"
 
-api_key = ENV['WANIKANI_API_KEY']
-raise "WANIKANI_API_KEY env var required" unless api_key
+api_key = ARGV[0] || ENV['WANIKANI_API_KEY']
+if api_key.nil? || api_key.empty?
+  raise <<~USAGE
+
+    No API key was provided. It's at the bottom fo your WaniKani Account page:
+      https://www.wanikani.com/account
+
+    usage (environment variable):
+      WANIKANI_API_KEY=abcdef12345 whenkani
+
+    usage (command line argument):
+      whenkani abcdef12345
+
+  USAGE
+end
 
 def human_time(seconds)
   if seconds < 60
@@ -15,9 +28,7 @@ def human_time(seconds)
   end
 end
 
-wani_kani = WhenKani.new(api_key)
-
-seconds = wani_kani.seconds_until_review
+seconds = WhenKani.new(api_key).seconds_until_review
 
 if seconds > 0
   puts "You're not ready, come back in #{human_time(seconds)}"

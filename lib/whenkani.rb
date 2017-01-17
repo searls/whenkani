@@ -1,8 +1,8 @@
 require "net/http"
 require "json"
-require "wanikani/version"
+require "whenkani/version"
 
-class WaniKani
+class WhenKani
   def initialize(api_key)
     @api_key = api_key
   end

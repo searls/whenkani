@@ -1,3 +1,3 @@
-class WaniKani
+class WhenKani
   VERSION = "0.1.0"
 end

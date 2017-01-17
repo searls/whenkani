@@ -15,7 +15,7 @@ def human_time(seconds)
   end
 end
 
-wani_kani = WaniKani.new(api_key)
+wani_kani = WhenKani.new(api_key)
 
 seconds = wani_kani.seconds_until_review
 
